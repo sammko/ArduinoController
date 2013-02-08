@@ -18,7 +18,11 @@ namespace ArduinoController
         {
             ard = a;
             //put code here.
-            
+            //ard.pauseDevice();
+            while (true)
+            {
+                Console.WriteLine(ard.ping().ToString());
+            }
         }
     }
 }

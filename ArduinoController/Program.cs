@@ -38,6 +38,7 @@ namespace ArduinoController
         static Arduino ard;
         static void Main(string[] args)
         {
+            string name;
             _handler += new EventHandler(Handler);
             SetConsoleCtrlHandler(_handler, true);
 
@@ -52,7 +53,9 @@ namespace ArduinoController
             {
                 com = args[0];
             }
-            ard = new Arduino(COM: com, DeviceVersion: "Arduino Uno Rev.3", DeviceName: "SammkosArduino");
+            Console.Write("Enter a name for your deivice: ");
+            name = Console.ReadLine();
+            ard = new Arduino(COM: com, DeviceVersion: "Arduino Uno Rev.3", DeviceName: name);
             Root.root(ard);
         }
     }

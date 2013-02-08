@@ -43,7 +43,8 @@ namespace ArduinoController
             Init = 0x2F,
             Pause = 0x3F,
             UnPause = 0x4F,
-            IsPaused = 0x5F
+            Ping = 0x2E,
+            PingR = 0x20,
         }
 
         private void initSerial()
@@ -80,12 +81,7 @@ namespace ArduinoController
         {
             this.sendPacket((byte)PacketHeaders.UnPause); ;
         }
-        /*
-        public void isPaused() //this doesnt seem to work properly
-        {
-            this.sendPacket((byte)PacketHeaders.IsPaused);
-        }
-        */
+
         public void sendPacket(byte[] data)
         {
             serial.Write(data, 0, data.Length);
@@ -103,6 +99,18 @@ namespace ArduinoController
             return System.Text.Encoding.UTF8.GetString(readPacket(length));
         }
 
+        public int ping()
+        {
+            this.sendPacket((byte)PacketHeaders.Ping);
+            int i=0;
+            while (!(readPacket(1)[0] == (byte)PacketHeaders.PingR))
+            {
+                System.Threading.Thread.Sleep(1);
+                i++;
+                if (i > 1000) { return -1; }
+            }
+            return i;
+        }
 
         public byte[] readPacket(int length = 0)
         {
