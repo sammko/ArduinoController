@@ -27,7 +27,7 @@ namespace ArduinoController
         public int getInitPacketLength() { return 2 + DeviceName.Length; }
         public int getAvailableLength() { return serial.BytesToRead; }
         //Constructor & Initialization
-        public Arduino(string COM, string DeviceVersion = "Arduino", string DeviceName = "My Arduino", byte PHandlerID = 0, int Baud = 9600)
+        public Arduino(string COM, string DeviceVersion = "Arduino x", string DeviceName = "My Arduino", byte PHandlerID = 0, int Baud = 9600)
         {
             this.ComPort = COM;
             this.DeviceVersion = DeviceVersion;
@@ -80,12 +80,12 @@ namespace ArduinoController
         {
             this.sendPacket((byte)PacketHeaders.Revive); ;
         }
-
-        public void isDead()
+        /*
+        public void isDead() //this doesnt seem to work properly
         {
             this.sendPacket((byte)PacketHeaders.IsDead);
         }
-
+        */
         public void sendPacket(byte[] data)
         {
             serial.Write(data, 0, data.Length);

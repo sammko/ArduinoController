@@ -14,8 +14,8 @@ void loop()
 		dead = true;
 	}
 	getDead();
-	Serial.println("TEST");
-	Serial.flush();
+	//Serial.println("TEST");
+	//Serial.flush();
 	while(dead)
 	{
 		getDead();

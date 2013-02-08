@@ -53,14 +53,7 @@ namespace ArduinoController
                 com = args[0];
             }
             ard = new Arduino(COM: com, DeviceVersion: "Arduino Uno Rev.3", DeviceName: "SammkosArduino");
-            
-            while (true)
-            {
-                if (ard.getAvailableLength() > 0)
-                {
-                    Console.Write(ard.readString());
-                }
-            }
+            Root.root(ard);
         }
     }
 }
