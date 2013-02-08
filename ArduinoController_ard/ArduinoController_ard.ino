@@ -13,14 +13,24 @@ void loop()
 	{
 		dead = true;
 	}
-	Serial.println("Hi, TESTING");
+	getDead();
+	Serial.println("TEST");
 	Serial.flush();
 	while(dead)
 	{
+		getDead();
 		if (Serial.read() == 0x4F)
 		{
 			dead = false;
 		}
+	}
+}
+
+void getDead()
+{
+	if (Serial.read() == 0x5F)
+	{
+		Serial.print(dead?1:0);
 	}
 }
 

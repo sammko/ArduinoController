@@ -38,6 +38,14 @@ namespace ArduinoController
             sendInitPacket();
         }
 
+        enum PacketHeaders
+        {
+            Init = 0x2F,
+            Kill = 0x3F,
+            Revive = 0x4F,
+            IsDead = 0x5F
+        }
+
         private void initSerial()
         {
             serial = new SerialPort(this.ComPort, this.Baud);
@@ -53,7 +61,7 @@ namespace ArduinoController
         {
             
             byte[] data = new byte[2 + DeviceName.Length];
-            data[0] = 0x2F;
+            data[0] = (byte)PacketHeaders.Init;
             data[1] = getPacketHandlerID();
             for (int i = 0; i < DeviceName.Length - 1; i++)
             {
@@ -65,19 +73,28 @@ namespace ArduinoController
 
         public void killDevice()
         {
-            byte[] data = new byte[1] { 0x3F };
-            this.sendPacket(data);
+            this.sendPacket((byte)PacketHeaders.Kill);
         }
 
         public void reviveDevice()
         {
-            byte[] data = new byte[1] { 0x4F };
-            this.sendPacket(data);
+            this.sendPacket((byte)PacketHeaders.Revive); ;
+        }
+
+        public void isDead()
+        {
+            this.sendPacket((byte)PacketHeaders.IsDead);
         }
 
         public void sendPacket(byte[] data)
         {
             serial.Write(data, 0, data.Length);
+        }
+
+        public void sendPacket(byte data)
+        {
+            byte[] d = new byte[1] { data };
+            this.sendPacket(d);
         }
 
         public string readString(int length = 0)
