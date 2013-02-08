@@ -66,7 +66,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ArduinoController_ard.ino" />
+    <None Include="ArduinoController_ard.ino">
+      <FileType>CppCode</FileType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Visual Micro\.ArduinoController_ard.vsarduino.h" />
