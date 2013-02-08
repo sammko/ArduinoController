@@ -29,7 +29,7 @@ namespace ArduinoController
             switch (sig)
             {
                 case CtrlType.CTRL_CLOSE_EVENT:
-                    ard.killDevice();
+                    ard.pauseDevice();
                     return true;
                 default: return true;
             }

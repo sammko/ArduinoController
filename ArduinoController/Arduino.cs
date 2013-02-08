@@ -41,9 +41,9 @@ namespace ArduinoController
         enum PacketHeaders
         {
             Init = 0x2F,
-            Kill = 0x3F,
-            Revive = 0x4F,
-            IsDead = 0x5F
+            Pause = 0x3F,
+            UnPause = 0x4F,
+            IsPaused = 0x5F
         }
 
         private void initSerial()
@@ -71,19 +71,19 @@ namespace ArduinoController
             isInit = true;
         }
 
-        public void killDevice()
+        public void pauseDevice()
         {
-            this.sendPacket((byte)PacketHeaders.Kill);
+            this.sendPacket((byte)PacketHeaders.Pause);
         }
 
-        public void reviveDevice()
+        public void unpauseDevice()
         {
-            this.sendPacket((byte)PacketHeaders.Revive); ;
+            this.sendPacket((byte)PacketHeaders.UnPause); ;
         }
         /*
-        public void isDead() //this doesnt seem to work properly
+        public void isPaused() //this doesnt seem to work properly
         {
-            this.sendPacket((byte)PacketHeaders.IsDead);
+            this.sendPacket((byte)PacketHeaders.IsPaused);
         }
         */
         public void sendPacket(byte[] data)
